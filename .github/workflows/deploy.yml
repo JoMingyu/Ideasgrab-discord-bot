@@ -8,14 +8,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  one:
+    docker:
+      - image: cimg/python:3.9
+    executor: serverless/default
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.8"
     - uses: serverless/github-action@v3.1
       with:
         args: -c "serverless plugin install --name serverless-python-requirements && serverless plugin install --name serverless-plugin-log-retention && serverless deploy"
