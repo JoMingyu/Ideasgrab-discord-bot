@@ -5,6 +5,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
+  deploymentMethod: direct
   region: ap-northeast-2
   runtime: python3.8
   stage: prod
