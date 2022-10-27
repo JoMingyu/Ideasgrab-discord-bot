@@ -41,7 +41,7 @@ def get_ideas() -> List[str]:
     return ideas
 
 
-def main():
+def main(event, lambda_context):
     ideas = get_ideas()
 
     for seq, idea in enumerate(ideas, 1):

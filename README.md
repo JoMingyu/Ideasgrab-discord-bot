@@ -5,9 +5,12 @@
 - Poetry
 
 ## Init
-- run `npm install serverless -g`
+- run `poetry install`
 
 ## Deploy
+### Ready serverless
+- run `npm install`
+
 ### Ready credentials
 - run `pip install awscli`
 - run `aws configure`

@@ -8,9 +8,25 @@ provider:
   region: ap-northeast-2
   runtime: python3.9
   stage: prod
+	
+custom:
+  pythonRequirements:
+    usePoetry: true
+    modifyPackageInclude: false
+	
+package:
+  exclude:
+    - ./**
+  include:
+    - src/main.py
 
 functions:
   rateHandler:
-    handler: handler.hello
+    handler: src.main.main
     events:
       - schedule: rate(1 minute)
+    logRetentionInDays: 7
+
+plugins:
+  - serverless-python-requirements
+  - serverless-plugin-log-retention
