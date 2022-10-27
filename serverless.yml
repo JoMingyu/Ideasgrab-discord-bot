@@ -15,10 +15,9 @@ custom:
     usePoetry: true
 
 package:
-  individually: true
   patterns:
     - '!./**'
-    - 'src/main.py'
+    - 'src/**'
 
 functions:
   rateHandler:
