@@ -1,19 +1,18 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
-name: Python application
+name: Deploy
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  one:
-    docker:
-      - image: cimg/python:3.9
-    executor: serverless/default
+  build:
+    runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
     - uses: serverless/github-action@v3.1
       with:
         args: -c "serverless plugin install --name serverless-python-requirements && serverless plugin install --name serverless-plugin-log-retention && serverless deploy"
