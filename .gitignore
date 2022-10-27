@@ -1,5 +1,20 @@
-# Created by https://www.toptal.com/developers/gitignore/api/python,pycharm,macos,windows,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,pycharm,macos,windows,node
+# Created by https://www.toptal.com/developers/gitignore/api/python,serverless,node,linux,macos,visualstudiocode,pycharm
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,serverless,node,linux,macos,visualstudiocode,pycharm
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
 ### macOS ###
 # General
@@ -446,30 +461,27 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-### Windows ###
-# Windows thumbnail cache files
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
+### Serverless ###
+# Ignore build directory
+.serverless
 
-# Dump file
-*.stackdump
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
-# Folder config file
-[Dd]esktop.ini
+# Local History for Visual Studio Code
+.history/
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Built Visual Studio Code Extensions
+*.vsix
 
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
 
-# Windows shortcuts
-*.lnk
-
-# End of https://www.toptal.com/developers/gitignore/api/python,pycharm,macos,windows,node
+# End of https://www.toptal.com/developers/gitignore/api/python,serverless,node,linux,macos,visualstudiocode,pycharm
