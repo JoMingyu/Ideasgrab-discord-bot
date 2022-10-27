@@ -10,13 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 16
     - uses: actions/setup-python@v4
       with:
         python-version: "3.9"
-    - uses: serverless/github-action@v3.1
+    - uses: serverless/github-action@v3
       with:
         args: -c "serverless plugin install --name serverless-python-requirements && serverless plugin install --name serverless-plugin-log-retention && serverless deploy"
         entrypoint: /bin/sh

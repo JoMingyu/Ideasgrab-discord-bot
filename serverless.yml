@@ -13,9 +13,9 @@ provider:
 custom:
   pythonRequirements:
     usePoetry: true
-    modifyPackageInclude: false
 
 package:
+  individually: true
   patterns:
     - '!./**'
     - 'src/main.py'
