@@ -1,0 +1,16 @@
+service: ideasgrab-discord-bot
+app: ideasgrab-discord-bot
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: ap-northeast-2
+  runtime: python3.9
+  stage: prod
+
+functions:
+  rateHandler:
+    handler: handler.hello
+    events:
+      - schedule: rate(1 minute)
