@@ -14,7 +14,7 @@ custom:
     usePoetry: true
     dockerizePip: true
     modifyPackageInclude: false
-	
+
 package:
   patterns:
     - '!./**'
