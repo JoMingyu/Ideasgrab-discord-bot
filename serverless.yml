@@ -12,6 +12,7 @@ provider:
 custom:
   pythonRequirements:
     usePoetry: true
+    dockerizePip: true
     modifyPackageInclude: false
 	
 package:
