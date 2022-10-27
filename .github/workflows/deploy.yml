@@ -10,13 +10,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.8
+    - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
-        python-version: "3.8"
+        python-version: "3.9"
     - name: serverless deploy
       uses: serverless/github-action@v3.1
       with:
