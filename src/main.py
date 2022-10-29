@@ -1,14 +1,19 @@
-from http import HTTPStatus
+import os
 from typing import List
 
 import requests
 from bs4 import BeautifulSoup
+from discord import SyncWebhook
+from sqlalchemy.orm import Session
+
+from src.database import SessionLocal
+from src.models.idea import IdeaModel
 
 
 def parse_response(response) -> List[str]:
     result = list()
-    soup = BeautifulSoup(response.text, 'html.parser')
-    elements = soup.find('ol').find_all('li')
+    soup = BeautifulSoup(response.text, "html.parser")
+    elements = soup.find("ol").find_all("li")
 
     for element in elements:
         result.append(element.text)
@@ -17,36 +22,42 @@ def parse_response(response) -> List[str]:
 
 
 def get_ideas() -> List[str]:
-    base_url = 'https://www.ideasgrab.com/'
-    responses = list()
+    response = requests.get(url="https://www.ideasgrab.com/")
 
-    while True:
-        count = len(responses)
-        response = requests.get(url=f'{base_url}ideas-{count * 1000}-{count * 1000 + 1000}')
-        if response.status_code == HTTPStatus.NOT_FOUND:
-            break
-        responses.append(response)
+    result = parse_response(response)
 
-    responses.reverse()
-    responses.append(requests.get(url=base_url))
-
-    ideas = list()
-
-    for response in responses:
-        result = parse_response(response)
-        result.reverse()
-
-        ideas += result
-
-    return ideas
+    return result
 
 
-def main(event, lambda_context):
+def get_latest_idea(db: Session):
+    idea = db.query(IdeaModel).order_by(IdeaModel.id.desc()).first()
+    return idea.text
+
+
+def set_latest_idea(db: Session, idea: str):
+    idea = IdeaModel(text=idea)
+    db.add(idea)
+    db.commit()
+
+
+def send_webhook(message: str):
+    webhook = SyncWebhook.from_url(os.getenv("DISCORD_WEBHOOK_URL"))
+    webhook.send(content=message)
+
+
+def main(event=None, lambda_context=None):
+    db = SessionLocal()
+
     ideas = get_ideas()
+    latest_idea_now = ideas[0]
+    latest_idea = get_latest_idea(db=db)
 
-    for seq, idea in enumerate(ideas[:10], 1):
-        print(f'{seq}. {idea}')
+    while latest_idea != ideas[0]:
+        send_webhook(ideas[0])
+        ideas = ideas[1:]
+
+    set_latest_idea(db=db, idea=latest_idea_now)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
