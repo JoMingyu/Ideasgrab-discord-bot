@@ -1,7 +1,7 @@
 service: ideasgrab-discord-bot
 app: ideasgrab-discord-bot
 
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -9,21 +9,21 @@ provider:
   region: ap-northeast-2
   runtime: python3.9
   stage: prod
-	
+
 custom:
   pythonRequirements:
     usePoetry: true
 
 package:
   patterns:
-    - '!./**'
-    - 'src/**'
+    - "!./**"
+    - "src/**"
 
 functions:
   rateHandler:
     handler: src.main.main
     events:
-      - schedule: rate(1 minute)
+      - schedule: rate(1 hour)
     logRetentionInDays: 7
 
 plugins:
