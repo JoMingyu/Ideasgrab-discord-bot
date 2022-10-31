@@ -56,7 +56,8 @@ def main(event=None, lambda_context=None):
         send_webhook(ideas[0])
         ideas = ideas[1:]
 
-    set_latest_idea(db=db, idea=latest_idea_now)
+    if latest_idea != latest_idea_now:
+        set_latest_idea(db=db, idea=latest_idea_now)
 
 
 if __name__ == "__main__":
