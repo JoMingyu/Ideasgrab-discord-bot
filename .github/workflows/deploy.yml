@@ -2,21 +2,21 @@ name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.9"
-    - uses: serverless/github-action@v3
-      with:
-        args: -c "serverless plugin install --name serverless-python-requirements && serverless plugin install --name serverless-plugin-log-retention && serverless deploy"
-        entrypoint: /bin/sh
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - uses: serverless/github-action@v3
+        with:
+          args: -c "serverless plugin install --name serverless-python-requirements && serverless plugin install --name serverless-plugin-log-retention && serverless deploy"
+          entrypoint: /bin/sh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
